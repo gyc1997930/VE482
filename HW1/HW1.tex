@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{setspace}
+\geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}
+\begin{document}
+\begin{spacing}{2.0}
+\vspace*{0.25cm}
+
+\hrulefill
+
+\thispagestyle{empty}
+
+\begin{center}
+\begin{large}
+\sc{UM--SJTU Joint Institute \vspace{0.3em} \\ Introduction to Operating Systems \\(VE482)}
+\end{large}
+
+\hrulefill
+
+\vspace*{5cm}
+\begin{Large}
+\sc{{Homework 1}}
+\end{Large}
+
+\vspace{2em}
+
+\end{center}
+
+
+\vfill
+
+\begin{table}[h!]
+\flushleft
+\begin{tabular}{lll}
+Name: Ji Xingyou \hspace*{2em}&
+ID: 515370910197\hspace*{2em}
+\\
+
+Date: 15 September 2017
+
+\end{tabular}
+\end{table}
+
+\hfill
+
+\newpage
+\noindent\textbf{Ex.1} -- \textit{Revisions}\\
+Stack is the area created by automatic variable assignment and function call mechanism. Its addresses increase for high to low. \\
+Heap is the area created by dynamic allocation. Its addresses increase for low to high.\\
+\noindent\textbf{Ex.2} -- \textit{Personal research}\\
+1. First, the BIOS will conduct the Power-On Self Test (POST), checking whether the hardware in the computer is functioning or not. Next, the BIOS will give the control to the power-on program. Then, the computer will read the hard disk. Then, the computer loads the operating system to the RAM and check the configuration files. Finally, the computer will be ready to read data and commands input by the user.\\
+BIOS takes the role of examining the hardware condition, communicate with the computer's input and output, and set the breaking-off signal for every hardware.\\
+After the computer is powered on, BIOS will be turned on to conduct a series of self-examination. Afterwards, BIOS will give the control of the computer to the OS.\\
+2. A hybrid kernel is an operating system kernel architecture combining microkernel and monolithic kernel architectures used in computer operating systems.\\
+An exo kernel is a much smaller kernel compared to normal kernels(monolithic kernel). It gives more direct acces to the hardware, thus removing most abstractions.\\ 
+\noindent\textbf{Ex.3} -- \textit{Course application}\\
+1. a \& c \& d\\
+For option a), since disabling interrupts belong to the operating system management, it can only be done in the kernel mode.\\
+For option b), reading the time-of-day clock belongs to the user mode.\\
+For option c), setting the time-of-day clock belongs to the privileged instructions, which means it can only be given to the kernel.\\
+For option d), changing the memory map belongs to the kernel mode.\\
+2. The time taken to complete the execution depends on how the three programs are combined.\\
+i). (P0,P1) and P2\\
+$$t=(5+10)\&20=15\&20=20(ms)$$
+ii). (P0,P2) and P3\\
+$$t=(5+20)\&10=25\&10=25(ms)$$
+iii). (P1,P2) and P3\\
+$$t=(10+20)\&5=30\&5=30(ms)$$
+\noindent\textbf{Ex.4} -- \textit{Simple problem}\\
+i). 25 lines by 80 rows monochrome
+$$N_1=25\times80=2000(byte)$$
+$$M_1=2000\times\frac{\$5}{1000}=\$10$$
+ii). 1024 x 768 pixel 24-bit
+$$N_2=1024\times768\times\frac{24}{8}=2359296(byte)$$
+$$M_2=2359296\times\frac{\$5}{1000}=\$11520$$
+For the current price, it will be less than $\$1/MB$.\\
+\noindent\textbf{Ex.5} -- \textit{Commands lines on a Unix system}\\
+See the attached .sh file.
+\end{spacing}
+\end{document}
