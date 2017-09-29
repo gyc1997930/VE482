@@ -1,0 +1,369 @@
+\documentclass{article}
+
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+    columns=fixed,
+    frame=shadowbox,
+    backgroundcolor=\color[RGB]{245,245,244},
+    keywordstyle=\color[RGB]{40,40,255},
+    numberstyle=\footnotesize\color{darkgray},
+    commentstyle=\it\color[RGB]{0,96,96},
+    stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},
+    showstringspaces=false,
+    language=bash
+}
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+\begin{document}
+
+\vspace*{0.25cm}
+
+\hrulefill
+
+\thispagestyle{empty}
+
+\begin{center}
+\begin{large}
+\sc{UM--SJTU Joint Institute \vspace{0.3em} \\ Introduction to Operating Systems \\(VE482)}
+\end{large}
+
+\hrulefill
+
+\vspace*{5cm}
+\begin{Large}
+\sc{{Laboratory Report}}
+\end{Large}
+
+\vspace{2em}
+
+\begin{large}
+\sc{{Lab 2
+\vspace{0.5em}
+
+}}
+\end{large}
+\end{center}
+
+
+\vfill
+
+\begin{table}[h!]
+\flushleft
+\begin{tabular}{lll}
+Name: Ji Xingyou \hspace*{2em}&
+ID: 515370910197\hspace*{2em}
+\\
+
+Date: 22 September 2017
+
+\end{tabular}
+\end{table}
+
+\hfill
+\newpage
+\section{Basic shell}
+\begin{itemize}
+\item Use the mkdir, touch, mv, cp, and ls commands to:\\
+\begin{itemize}
+\item Create a file named test.\\
+\begin{lstlisting}[language=bash]
+touch test
+\end{lstlisting}
+\item Move test to dir/test.txt, where dir is a new directory.\\
+\begin{lstlisting}[language=bash]
+mkdir dir
+mv test /dir/test.txt
+\end{lstlisting}
+\item Copy dir/test.txt to dir/test$\_$copy.txt.\\
+\begin{lstlisting}[language=bash]
+cp dir/test . txt dir/test copy . txt
+\end{lstlisting}
+\item List all the files contained in dir.\\
+\begin{lstlisting}[language=bash]
+ls -a /dir/
+\end{lstlisting}
+\end{itemize}
+\item Use the grep command to:\\
+\begin{itemize}
+\item List all the files from /etc containing the pattern 127.0.0.1.\\
+\begin{lstlisting}[language=bash]
+grep `127.0.0.1' etc/*
+\end{lstlisting}
+\item Only print the lines containing your username and root in the file /etc/passwd (only one grep
+should be used)\\
+\begin{lstlisting}[language=bash]
+grep −E 'root|HappyBirthdayHoney' /etc/passwd
+\end{lstlisting}
+\end{itemize}
+\item Use the find command to:\\
+\begin{itemize}
+\item List all the files from /etc that have been accessed less than 24 hours ago.\\
+\begin{lstlisting}[language=bash]
+find /etc -type f -ctime  -1
+\end{lstlisting}
+\item List all the files from /etc whose name contains the pattern “netw”.\\
+\begin{lstlisting}[language=bash]
+find /etc -name ``$netw$''
+\end{lstlisting}
+\end{itemize}
+\item In the bash man-page read the part related to redirections. Explain the following signs $>$, $>>$, $<<<$, $>\&1$, and $2>\&1 >$. What is the use of the tee command.\\
+\textbf{tee:} read from standard input and write to standard output and files.
+\textbf{$>$:} redirect the standard output to a file and override the original file\\
+\textbf{$>>$:} redirect the standard output to a file and append to the original file\\
+\textbf{$<<<$:} redirect the content behind it to the standard input of the content ahead of it\\
+\textbf{$>\&1$:} redirect the standard output to standard output\\
+\textbf{$2>\&1>$:} redirect the standard error information to the standard output
+\begin{lstlisting}[language=bash]
+tee [OPTION]...[FILE]...
+\end{lstlisting}
+\textbf{-a:} append to the given files and do not overwrite
+
+\textbf{-i:} ignore interrupt signals
+
+\textbf{-p:} diagnose errors writing to non pipes
+
+\item Explain the behaviour of the xargs command and of the $|$ sign.\\
+\textbf{xargs:} build and execute command lines from standard input
+
+\textbf{$|$:} transport the output of command 1 to command 2
+\begin{lstlisting}[language=bash]
+command 1 | command 2
+\end{lstlisting}
+\item What are the head and tail commands? How to “live display” a file as new lines are appended?\\
+\textbf{head:} output the first part of files
+\begin{lstlisting}[language=bash]
+head [OPTION]...[FILE]...
+\end{lstlisting}
+
+\textbf{tail:} output the last part of files
+\begin{lstlisting}[language=bash]
+tail [OPTION]...[FILE]...
+\end{lstlisting}
+\textbf{live display:}
+\begin{lstlisting}[language=bash]
+tail -f
+\end{lstlisting}
+\item How to monitor the system using ps, top, free, vmstat?\\
+\begin{lstlisting}[language=bash]
+ps
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+top -hv | -bcHioSs -d secs -n max -u|U user -p pid -o fld -w [cols]
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+free [OPTION]
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+vmstat [OPTION] [DELAY [COUNT]]
+\end{lstlisting}
+\item In Minix 3, how to manage softwares (install, remove, update. . . )?\\
+\begin{lstlisting}[language=bash]
+pkgin install [NAME]
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+pkgin remove [NAME]
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+pkgin update
+\end{lstlisting}
+\item What is the purpose of the commands ifconfig, adduser, and passwd?\\
+\textbf{ifconfig:} configure a network interface
+
+\textbf{adduser:} add a user to the system
+
+\textbf{passwd:} change user password
+\end{itemize}
+\section{Working on a remote server}
+\begin{itemize}
+\item Setup an SSH server on Minix 3. From Linux (using ssh) or Windows (using Putty) log into Minix 3. Note: the network need to be properly setup on the Virtual Machine (VM).\\
+\item What is the default SSH port? Change this port for port 2222. Log into Minix 3 using this new SSH server setup.\\
+The default SSH port is 22.\\
+\item List and explain the role of each the file in the $\$HOME/$.ssh directory. In $\$HOME/$.ssh/config, create an entry for Minix 3.\\
+\textbf{id$\_$rsa.pub:} public key for the ssh connection\\
+\textbf{id$\_$rsa:} private key for the ssh connection\\
+\end{itemize}
+\section{Basic Bash scripting}
+\begin{itemize}
+\item What should be the first line of a Bash script?\\
+\begin{lstlisting}[language=bash]
+#!/bin/bash
+\end{lstlisting}
+\item What are the main differences between sh, bash, csh, and zsh?\\
+Some of them are better.
+\item How to define and access variables?\\
+\textbf{define:}
+\begin{lstlisting}[language=bash]
+course_name=``ve482''
+\end{lstlisting}
+\textbf{access:}
+\begin{lstlisting}[language=bash]
+$course_name
+\end{lstlisting}
+\item What is the meaning of $\$0, \$1,..., \$?, \$!$?\\
+\textbf{$\$0$:} the name of the file to be executed
+
+\textbf{$\$1$:} first parameter in the script
+
+\textbf{$\$?$:} show the exit status of the last command
+
+\textbf{$\$!$:} the ID number of the last process in the background system
+
+\textbf{$\$\#$:} show the number of the current parameters
+
+\item How to define arrays and access or assign elements?\\
+\textbf{define:}
+\begin{lstlisting}[language=bash]
+array_name=(value_1,value_2,...,value_n)
+\end{lstlisting}
+\textbf{access:}
+\begin{lstlisting}[language=bash]
+${array_name[index]}
+\end{lstlisting}
+\textbf{assign:}
+\begin{lstlisting}[language=bash]
+${array_name[index]}
+\end{lstlisting}
+\item How to perform if and switch statements? Provide an example.\\
+\textbf{if:}
+\begin{lstlisting}[language=bash]
+if condition
+then
+    command1
+    command2
+    ...
+    commandN
+else
+	command
+fi
+\end{lstlisting}
+\textbf{example:}
+\begin{lstlisting}[language=bash]
+a=10
+b=20
+if [ $a == $b ]
+then
+   echo "a is equal to b"
+elif [ $a -gt $b ]
+then
+   echo "a is greater than b"
+elif [ $a -lt $b ]
+then
+   echo "a is less then b"
+else
+   echo "no matches"
+fi
+\end{lstlisting}
+\textbf{switch:}
+\begin{lstlisting}[language=bash]
+case value in
+mode 1)
+    command1
+    command2
+    ...
+    commandN
+    ;;
+mode 2）
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac
+\end{lstlisting}
+\textbf{example:}
+\begin{lstlisting}[language=bash]
+echo 'Please input a number between 1 and 4:'
+read input
+case $input in
+    1)  echo 'You input 1'
+    ;;
+    2)  echo 'You input 2'
+    ;;
+    3)  echo 'You input 3'
+    ;;
+    4)  echo 'You input 4'
+    ;;
+    *)  echo 'Invalid input'
+    ;;
+esac
+\end{lstlisting}
+\item What are the various syntaxes of a for loop? For each type write a sample code.\\
+\textbf{for:}
+\begin{lstlisting}[language=bash]
+for ((i=0;i<10;++i))
+do echo $i
+done
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+for i in {1..10}
+do echo $i
+done
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+for i in $(seq 1 10)
+do echo $i
+done
+\end{lstlisting}
+\item How to write a while loop?\\
+\textbf{while:}
+\begin{lstlisting}[language=bash]
+while condition
+do
+    command
+done
+\end{lstlisting}
+\item What is the use of the PS3 variable? Provide a short code example.\\
+PS3 variable is used to customize the prompt information.\\
+\textbf{example:}
+\begin{lstlisting}[language=bash]
+PS3="Select a day (1-4): "
+select i in mon tue wed exit
+do
+    case $i in
+        mon) echo "Monday";;
+        tue) echo "Tuesday";;
+        wed) echo "Wednesday";;
+        exit) exit;;
+    esac
+done
+\end{lstlisting}
+\item What is the purpose of the iconv command, and why is it useful?\\
+\textbf{iconv:} For the given file, translate its content from one encoding to another. \\
+It is useful because for example, if we want to get some data online, we can use iconv to translate them into the correct encoding.\\
+\item Given a variable $\$temp$ what is the effect of $\$\{\#temp\}$, $\$\{temp\%\%word\}$, $\$\{temp/pattern/string\}$.\\
+\textbf{$\$\{\#temp\}$:} output the length of the variable\\
+\textbf{$\$\{temp\%\%word\}$:} remove the first word in temp\\
+\textbf{$\$\{temp/pattern/string\}$:} change the first pattern in temp to string
+
+\item Search what are “regular expressions” and how to use them in a grep or find command. Give some simple examples based on files and keywords used in exercise 2 of assignment 2.\\
+
+\item Provide a brief introduction to both of them, explaining how to use them and when they reveal to
+be the most helpful.\\
+\textbf{sed:} stream editor for filtering and transforming text
+\begin{lstlisting}[language=bash]
+sed [OPTION]... {script-only-if-no-other-script} [input-file]
+\end{lstlisting}
+\textbf{awk:} pattern scanning and text processing language
+\begin{lstlisting}[language=bash]
+awk [-F fs] [-v var=value] ['prog'|-f progfile] [file ...]
+\end{lstlisting}
+\item Using curl or wget retrieve information on shanghai air quality and pipe it to sed which should parse the output in order to display the information in the terminal following the format below AQ: value Temp: value oC (e.g. AQ: 55 Temp: 24 oC).\\
+\begin{lstlisting}[language=bash]
+curl --silent 'http://aqicn.org/?city=Shanghai&widgetscript&size=large&id=52b39
+d71decf07.20261781' | sed 's/.*title=\\"Moderate\\">/AQ: /g' | sed 's/<\/div.*/
+/g'
+
+curl --silent 'http://aqicn.org/?city=Shanghai&widgetscript&size=large&id=52b39
+d71decf07.20261781' | sed "s/.*style\='font-size:10px;'>/Temp: /g" | sed 's/<\
+/td><\/tr><\/table>.*//g' && echo −e ”\u00B0C”
+\end{lstlisting}
+\item Pipelining the output of ifconfig to awk return only the ip address of your current active network connection (the active network interface can be passed to ifconfig).\\
+\begin{lstlisting}[language=bash]
+ifconfig wlp3s0 | awk '/inet /{print $2}'
+\end{lstlisting}
+\end{itemize}
+\end{document}
