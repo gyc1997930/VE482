@@ -103,9 +103,20 @@ Date: 28 September 2017
     \textbf{- fetch:} download objects and refs from another repository.\\
     \textbf{- reset:} reset current HEAD to the specified state.
     \item \textbf{Setup your git repository on the VE482 server.}
+    First, edit the config file.
+    \begin{lstlisting}[language=bash]
+	Host ve482
+		HostName 202.120.43.199
+		Port 2482
+		IdentityFile ~/.ssh/id_rsa
+	\end{lstlisting}
+	Then, in the terminal type
     \begin{lstlisting}[language=bash]
 	cd Desktop/VE482/Project1
-	git remote add origin git@ve482:515370910197/p1
+	git init
+	git add
+	git commit -m `482'
+	git remote add ve482 git@ve482:515370910197/p1
 	git push ve482
 	\end{lstlisting}
     \end{itemize}
@@ -163,7 +174,7 @@ rsync -av root@2222::www /usr/src_orig
 	\end{lstlisting}
 	\item \textbf{Revert the patch}\\
 	\begin{lstlisting}[language=bash]
-	patch -R -p0 < diff_file
+	patch -RE -p0 < diff_file
 	\end{lstlisting}
 \end{itemize}
 \subsection{Remarks}
