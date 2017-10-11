@@ -1,0 +1,17 @@
+clear all;clc;
+syms n CPU_utilization1;
+n=0:1:10;
+p1=0.25;
+p2=0.6;
+p3=0.9;
+CPU_utilization1=(1-p1.^n)*100;
+plot(n,CPU_utilization1);
+hold on;
+CPU_utilization2=(1-p2.^n)*100;
+plot(n,CPU_utilization2);
+hold on;
+CPU_utilization3=(1-p3.^n)*100;
+plot(n,CPU_utilization3);
+xlabel('number of processes n');
+ylabel('CPU utilization (%)');
+legend('p=25%','p=60%','p=90%');
