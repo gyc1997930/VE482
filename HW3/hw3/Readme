@@ -1,0 +1,13 @@
+Function:
+This program manages to read a certain file with certain naming rules, and then according print the sorted content to a new file with another specified name.
+
+Implementation:
+First, I declare two structs named Node and List accordingly in order to implement the list  function. To be specific, it can realize the function of initializing, freeing, inserting, sorting and printing. In the implementation of sorting and printing functions, I use function pointers to realize. Specifically, in the sorting function, I use the qsort function with a function pointer parameter so that I can declare six different sorting rules afterwards, that is int_inc, int_dec, double_inc, double_dec, string_inc, string_dec accordingly. Similarly, in the printing function, I use a function pointer to separate which printing format should be used.
+
+Then, I declare two structs named Data and Type, to stand for the data type and sorting mode separately. For the Data struct, it contains an integer d, 0 for int, 1 for double and 2 for char *. For the Type struct, it contains an integer t, 0 for inc, 1 for dec and 2 for rand.
+
+Next, I write a function to create the filename. It is simple so that I just omit the explanation here.
+
+Then, in the main function, I first make two loops to find out what data type and what sorting mode are for the input file. Then, I open the file and separate each line by the sign '='. Then, I sort these elements according to the sorting mode I just figured out and insert it to the list. After freeing the list and new created element as well as closing the files, the program is done.
+
+After several tests with different input, the program shows reliability.

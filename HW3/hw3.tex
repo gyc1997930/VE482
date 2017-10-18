@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+    columns=fixed,
+    numbers=left,
+    frame=none,
+    backgroundcolor=\color[RGB]{245,245,244},
+    keywordstyle=\color[RGB]{40,40,255},
+    numberstyle=\footnotesize\color{darkgray},
+    commentstyle=\it\color[RGB]{0,96,96},
+    stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},
+    showstringspaces=false,
+    language=c++,
+}
+\geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}
+\begin{document}
+\begin{spacing}{2.0}
+\vspace*{0.25cm}
+
+\hrulefill
+
+\thispagestyle{empty}
+
+\begin{center}
+\begin{large}
+\sc{UM--SJTU Joint Institute \vspace{0.3em} \\ Introduction to Operating Systems \\(VE482)}
+\end{large}
+
+\hrulefill
+
+\vspace*{5cm}
+\begin{Large}
+\sc{{Homework 3}}
+\end{Large}
+
+\vspace{2em}
+
+\end{center}
+
+
+\vfill
+
+\begin{table}[h!]
+\flushleft
+\begin{tabular}{lll}
+Name: Ji Xingyou \hspace*{2em}&
+ID: 515370910197\hspace*{2em}
+\\
+
+Date: 12 October 2017
+
+\end{tabular}
+\end{table}
+
+\hfill
+
+\newpage
+\section{\textit{Research on POSIX}}
+\indent The Portable Operating System Interface (POSIX) is a family of standards specified by the IEEE Computer Society for maintaining compatibility between operating systems. POSIX defines the application programming interface (API), along with command line shells and utility interfaces, for software compatibility with variants of Unix and other operating systems.
+
+POSIX standards exist to improve the portability of codes on UNIX systems.
+
+POSIX standards include APIs, data exchanging format and other instrumental rules.
+\section{\textit{General questions}}
+\begin{itemize}
+	\item \textit{Why would a thread voluntarily release the CPU?}\\
+	Different from processes, threads cannot give up CPU through clock interruption. Therefore, in order to make possible for other threads to be executed, it should automatically release the CPU through ways like thread$\_$yield.
+	\item \textit{What is the biggest advantage/disadvantage of user space threads?}\\
+	The biggest advantage is that it can be implemented on an operating system that does not support threads and switching threads does not require to trap the kernel.\\
+	The biggest disadvantage is that if one thread blocks, the entire process blocks. 
+
+	\item \textit{If a multithreaded process forks, a problem occurs if the child gets copies of all the parent’s threads. Suppose that one of the original threads was waiting for keyboard input. Now two threads are waiting for keyboard input, one in each process. Does this problem ever occur in single-threaded processes?}\\
+	No. Because if a single-threaded process is blocked on the keyboard, it cannot fork. 
+	\item \textit{Many UNIX system calls have no Win32 API equivalents. For each such call, what are the consequences when porting a program from a UNIX system to a Windows system?}\\
+	
+\end{itemize}
+\section{\textit{C programming}}
+\begin{itemize}
+	\item \textit{Implement a linked list structure containing two pointers of type char and void, respectively. It should be possible to at least add elements to the list.}\\
+	\item \textit{Knowingthatthevoidpointerinthestructurecouldcontainsomechar*,int,ordouble,write a search function for this linked list.}\\
+	\item \textit{The linked list will store elements read from an ASCII file where each line is in the format somestring=somedata. The type of the data is defined in the filename; for instance a file containing unsorted integers will be named rand int.txt. Implement the necessary functions to read and write such files.}\\
+	\item \textit{Use a function pointers to compare and sort the elements from the structure with respect to the data field. Implement the following sorting orders: increasing, decreasing, and random. The filename is sortingtype dataype.txt, where sortingtype is rand, inc, or dec.}\\
+	\item \textit{Write a function to test the implementation.}\\
+	This part is attached in the tar file named main.c with a Readme file providing for explanation, thus I shall just omit the tedious codes here.
+\end{itemize}
+\end{spacing}
+\end{document}
