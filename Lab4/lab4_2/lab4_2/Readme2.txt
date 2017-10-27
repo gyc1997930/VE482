@@ -1,0 +1,1 @@
+In this program, I write another main.c, which supports some prompting information. It is not difficult to implement since I already made the division in previous task. Therefore, I just wrote some while loop and some "funny" promotion information which I somehow learned in the famous horror movie SAW.

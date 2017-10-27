@@ -1,0 +1,155 @@
+\documentclass{article}
+
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    columns=fixed,
+    frame=shadowbox,
+    backgroundcolor=\color[RGB]{245,245,244},
+    keywordstyle=\color[RGB]{40,40,255},
+    numberstyle=\footnotesize\color{darkgray},
+    commentstyle=\it\color[RGB]{0,96,96},
+    stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},
+    showstringspaces=false,
+    language=C
+}
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+\begin{document}
+\begin{spacing}{1.5}
+
+\vspace*{0.25cm}
+
+\hrulefill
+
+\thispagestyle{empty}
+
+\begin{center}
+\begin{large}
+\sc{UM--SJTU Joint Institute \vspace{0.3em} \\ Introduction to Operating Systems \\(VE482)}
+\end{large}
+
+\hrulefill
+
+\vspace*{5cm}
+\begin{Large}
+\sc{{Laboratory Report}}
+\end{Large}
+
+\vspace{2em}
+
+\begin{large}
+\sc{{Lab 4
+\vspace{0.5em}
+
+}}
+\end{large}
+\end{center}
+
+
+\vfill
+
+\begin{table}[h!]
+\flushleft
+\begin{tabular}{lll}
+Name: Ji Xingyou \hspace*{2em}&
+ID: 515370910197\hspace*{2em}
+\\
+
+Date: 26 October 2017
+
+\end{tabular}
+\end{table}
+
+\hfill
+\newpage
+\tableofcontents
+\newpage
+\section{Layer programming}
+\begin{itemize}
+    \item \textbf{The program can be divided into three layers, what are they?}\\
+    These three layers are separated as follows:
+    \begin{enumerate}
+    	\item Implement the list. 
+        \item Read the argv[] and generate the correct file name. Traverse the content of the file, inserting into list and sort them according to the sorting mode. Generate the output file name and write the sorting result into the output file
+        \item Implement the main function.
+    \end{enumerate}
+    \item \textbf{Split the program into files according to the defined layers.}\\
+    Done.
+    \item \textbf{Create the appropriate corresponding header files.}\\
+    For the list implementing layer, all the codes are put in list.h. Its implementation is in list.c.\\
+    For the reading and generating file name layer, all the codes are put in readName.h. Its implementation is in readName.c.\\
+    For the sorting layer, all the codes are put in sort.h. Its implementation is in sort.c.\\
+    For the writing into output file layer, all the codes are put in writeFile.h. Its implementation is in writeFile.c.
+    \item \textbf{If necessary rewrite functions such that no call is emitted from lower level functions to upper level functions.}\\
+    Luckily, I did not need to rewrite any functions. But in order to make the division among all layers clear, I reorganize the order of my codes and made some new combinations.
+    \item \textbf{The initial program implements a command line interface, write a “Menu interface” which (i) welcomes the user, (ii) prompts him for some task to perform, and (iii) runs it. When a task is completed the user should (i) be informed if it was successful and then (ii) be displayed the menu. From the menu he should be able to exit the program.}\\
+    When I finish dividing the layer, it is very easy to write another main.c in order to support the ``Menu'' function. For the prompt information, I intentionally grab the lines from the famous horror movie Saw in order to tense the atmosphere.
+    \item\textbf{Write two main functions, one which will “dispatch” the work to another function which will run the command line user interface and a second one which will “dispatch” the work to the Menu user interface.}\\
+    Already done.
+\end{itemize}
+\section{Libraries}
+\begin{itemize}
+	\item\textbf{What are the three stages performed when compiling a file?}\\
+	The three stages are listed as follows:
+	\begin{enumerate}
+		\item Preprocessing: generate the preprocessing file.\\
+		\item Building: generate the assembly code file.\\
+		\item Link: generate the executable file.
+	\end{enumerate}
+	\item \textbf{Briefly describe each of them.}\\
+	Already do that part in the previous question.
+	\item \textbf{Explain the difference between the static and dynamic libraries.}\\
+	For the static libraries, they will be linked to the target codes when compiling. When the program is running, they will no longer be needed.\\
+	For the dynamic libraries, they will not be linked to the target codes when compiling. Instead, they are loaded into the target codes when the program is running. Therefore, it is obvious they are needed when the program is running.
+	\item \textbf{Create two static libraries, one for each of the two lowest layers in the previous program.}
+	\begin{lstlisting}
+	add_library(lab4_list_static STATIC list.c)
+	add_library(lab4_sort_static STATIC sort.c)
+	\end{lstlisting}
+	\item \textbf{Compile the command line version of the program using these two static libraries.}
+	\begin{lstlisting}
+	add_executable(lab4_main_static main.c)
+	target_link_libraries(lab4_main_static lab4_list_static lab4_sort_static)
+	\end{lstlisting}
+	\item\textbf{Generate two dynamic libraries, one for each of the two lowest layers in the previous program.}
+	\begin{lstlisting}
+	add_library(lab4_list_dynamic SHARED list.c)
+	add_library(lab4_sort_dynamic SHARED sort.c)
+	target_link_libraries(l4_list_dynamic l4_sort_dynamic)
+	\end{lstlisting}
+	\item\textbf{Compile the whole program.}
+	\begin{lstlisting}
+	add_executable(lab4_1 main.c list.c sort.c)
+	add_executable(lab4_2 main.c list.c sort.c)
+	\end{lstlisting}
+	\item \textbf{Compile the Menu version of the program using these two dynamic libraries.}
+	\begin{lstlisting}
+	add_executable(lab4_2 main.c)
+	target_link_libraries(lab4_2 lab4_sort_dynamic lab4_list_dynamic)
+	\end{lstlisting}
+	\item\textbf{What is the difference between a library and the API.}\\
+	Library is some basic functions supported by some certain programming languages.\\
+	API is some functions provided by the operating system in order to make it easy and convenient for programmers to implement certain functions.
+\end{itemize}
+
+\end{spacing}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+

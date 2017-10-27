@@ -1,36 +1,37 @@
 //
-//  dlist.h
-//  Lab4
+//  Dlist.h
+//  lab4_3
 //
-//  Created by 季星佑 on 2017/10/17.
+//  Created by 季星佑 on 2017/10/25.
 //  Copyright © 2017年 季星佑. All rights reserved.
 //
 
-#ifndef _LAB4_DLIST_H_
-#define _LAB4_DLIST_H_
+#ifndef Dlist_h
+#define Dlist_h
+
 // Data type stored in the dlist
 typedef enum dlistValueType_t {
-DLIST_INT = 0x01, // list contains int values
-DLIST_STR = 0x02, // list contains char* values
-DLIST_DOUBLE = 0x03, // list contains double values
-DLIST_UNKOWN = 0x00
-}dlistValueType;
+    DLIST_INT = 0x01, // list contains int values
+    DLIST_STR = 0x02, // list contains char* values
+    DLIST_DOUBLE = 0x03, // list contains double values
+    DLIST_UNKOWN = 0x00
+} dlistValueType;
 // Different options for sorting
 // String are sorted in lexical order
 typedef enum dlistSortMethod_t {
-DLIST_SORT_RAND = 0x01, // Randomize entries
-DLIST_SORT_INC = 0x02, // Sort in ascending order
-DLIST_SORT_DEC = 0x03, // Sort in descending order
-DLIST_SORT_UNKOWN = 0x00
-}dlistSortMethod;
+    DLIST_SORT_RAND = 0x01, // Randomize entries
+    DLIST_SORT_INC = 0x02, // Sort in ascending order
+    DLIST_SORT_DEC = 0x03, // Sort in descending order
+    DLIST_SORT_UNKOWN = 0x00
+} dlistSortMethod;
 // The value stored in the dlist
 // Research online what an ”union” is.
 typedef union dlistValue_t {
-int    intValue;
-double doubleValue;
-char*  strValue;
-}dlistValue;
-typedef void* dlist;
+    int    intValue;
+    double doubleValue;
+    char*  strValue;
+} dlistValue;
+typedef void*       dlist;
 typedef const void* dlist_const;
 
 dlist createDlist(dlistValueType type);
@@ -38,10 +39,12 @@ dlist createDlist(dlistValueType type);
 //          returns the created dlist object on success
 //          returns NULL on error
 int dlistIsEmpty(dlist_const this);
-// REQUIRES: argument 'this' is non-null and is a valid list // EFFECTS: return whether the list 'this' is empty
+// REQUIRES: argument 'this' is non-null and is a valid list
+// EFFECTS: return whether the list 'this' is empty
 void dlistAppend(dlist this, const char* key, dlistValue value);
 // REQUIRES: type instantiated in 'value' corresponds to the datatype in the list
-// argument 'this' and 'key' are both non-null and valid lists // EFFECTS : add a line of form ”key=value” to the tail of the dlist
+// argument 'this' and 'key' are both non-null and valid lists
+// EFFECTS : add a line of form ”key=value” to the tail of the dlist
 // MODIFIES: modifies 'this'.
 void dlistSort(dlist_const this, dlist listDst, dlistSortMethod method);
 // REQUIRES: argument 'this' is not null and is a valid list
@@ -50,7 +53,8 @@ void dlistSort(dlist_const this, dlist listDst, dlistSortMethod method);
 // Put the results in 'listDst' on success
 // Leave 'listDst' unchanged on failure
 // * Note 'listDst' may be non-empty when invoked.
-// * Be very careful with memory management regarding string lists. // MODIFIES: argument 'listDst'
+// * Be very careful with memory management regarding string lists.
+// MODIFIES: argument 'listDst'
 void dlistPrint(dlist_const this);
 // REQUIRES: argument 'this' is not null and is a valid list
 // EFFECTS: Print the content of 'this' in the required format to standard output.
@@ -60,4 +64,4 @@ void dlistFree(dlist this);
 // EFFECTS: if 'this' is NULL do nothing, other wise frees the list
 //          By freeing the list the user also needs to free the data
 //          the list manages
-#endif
+#endif /* Dlist_h */

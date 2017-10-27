@@ -1,0 +1,1 @@
+In this program, I implement the basic functions of a dlist. However, since I am not familiar with the union type, it might be buggy. Due to the limitation of time, I decided to have a check next time I need to use these codes.

@@ -1,0 +1,1 @@
+	add_library(lab4_sort STATIC sort.c)
