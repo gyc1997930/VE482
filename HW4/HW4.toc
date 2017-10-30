@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}\textit {Simple questions}}{3}
+\contentsline {section}{\numberline {2}\textit {Monitors}}{3}
+\contentsline {section}{\numberline {3}\textit {Race condition in Bash}}{3}
+\contentsline {section}{\numberline {4}\textit {Programming with semaphores}}{4}
